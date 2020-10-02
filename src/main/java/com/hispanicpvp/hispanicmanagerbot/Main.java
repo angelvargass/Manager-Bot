@@ -2,6 +2,7 @@ package com.hispanicpvp.hispanicmanagerbot;
 
 import com.hispanicpvp.hispanicmanagerbot.commands.KickCommand;
 import com.hispanicpvp.hispanicmanagerbot.commands.PingPongCommand;
+import com.hispanicpvp.hispanicmanagerbot.commands.RegisterCommand;
 import com.hispanicpvp.hispanicmanagerbot.utils.Utils;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import net.dv8tion.jda.api.JDABuilder;
@@ -22,7 +23,8 @@ public class Main {
         // adds commands
         client.addCommands(
                 new PingPongCommand(),
-                new KickCommand()
+                new KickCommand(),
+                new RegisterCommand()
                 );
 
         JDABuilder builder = JDABuilder.createDefault(args[0]);

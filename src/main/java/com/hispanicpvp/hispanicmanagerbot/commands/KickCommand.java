@@ -10,39 +10,39 @@ public class KickCommand extends Command {
 
     public KickCommand() {
         this.name = "kick";
-        this.help = "Kick users from the server";
+        this.help = "Kick users from the server.";
         this.arguments = "<user>";
     }
 
     @Override
     protected void execute(CommandEvent commandEvent) {
-        String args[] = commandEvent.getArgs().split(" ");
-        Member member, selfMember;
+        Member author = commandEvent.getMember();
 
-        if(!CommandUtils.validateArgsNumber(args, 1)) {
-            commandEvent.reply("You must type a <@user>");
-            return;
-        }
+        Member mentionedMember;
 
         try {
-            member = commandEvent.getMessage().getMentionedMembers().get(0);
+            mentionedMember = commandEvent.getMessage().getMentionedMembers().get(0);
+
+            if(!CommandUtils.isRegistered(author)) {
+                commandEvent.reply("You aren't registered with the bot");
+                return;
+            } else if(mentionedMember.getId().equals(author.getId())) {
+                commandEvent.reply("You can't kick yourself");
+                return;
+            }
+            if (author.hasPermission(Permission.KICK_MEMBERS)) {
+                commandEvent.reply("The user " + mentionedMember.getEffectiveName() + " was kicked from the server");
+                commandEvent.getGuild().kick(mentionedMember).queue();
+            } else {
+                commandEvent.reply("You don't have permission to kick members");
+            }
+
         } catch (IndexOutOfBoundsException e) {
             commandEvent.reply("You must mention a @user");
-            return;
+        } catch (HierarchyException e) {
+            commandEvent.reply("You need to modify the bot permissions");
         }
 
-        selfMember = commandEvent.getSelfMember();
-
-        if(selfMember.hasPermission(Permission.KICK_MEMBERS)) {
-            try {
-                commandEvent.getGuild().kick(member);
-                commandEvent.reply("The user " + member.getNickname() + " was kicked from the server");
-            } catch (HierarchyException e) {
-                commandEvent.reply("You need to modify the bot permissions");
-            }
-        } else {
-            commandEvent.reply("You don't have permission to kick members");
-        }
 
     }
 }
