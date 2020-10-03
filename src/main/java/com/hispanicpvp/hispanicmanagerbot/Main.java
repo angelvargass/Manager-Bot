@@ -1,5 +1,6 @@
 package com.hispanicpvp.hispanicmanagerbot;
 
+import com.hispanicpvp.hispanicmanagerbot.commands.BanCommand;
 import com.hispanicpvp.hispanicmanagerbot.commands.KickCommand;
 import com.hispanicpvp.hispanicmanagerbot.commands.PingPongCommand;
 import com.hispanicpvp.hispanicmanagerbot.commands.RegisterCommand;
@@ -19,16 +20,14 @@ public class Main {
         client.setPrefix(utils.getPrefix());
         client.setOwnerId(utils.getOwnerId());
         client.setEmojis("\uD83D\uDE03", "\uD83D\uDE2E", "\uD83D\uDE26");
-
-        // adds commands
         client.addCommands(
                 new PingPongCommand(),
                 new KickCommand(),
-                new RegisterCommand()
+                new RegisterCommand(),
+                new BanCommand()
                 );
 
         JDABuilder builder = JDABuilder.createDefault(args[0]);
-
         builder.addEventListeners(client.build());
         builder.build();
     }
