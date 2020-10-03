@@ -23,4 +23,8 @@ public class Utils {
     }
 
     public String getOwnerId() { return properties.getProperty("OWNER_ID"); }
+
+    public String getRequiredRole() { return properties.getProperty("requiredRoleToJoin"); }
+
+    public String getModerationCommandsLogChannel() { return properties.getProperty("moderationCommandsLogsChannel"); }
 }

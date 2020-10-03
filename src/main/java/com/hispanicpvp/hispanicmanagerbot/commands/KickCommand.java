@@ -1,5 +1,6 @@
 package com.hispanicpvp.hispanicmanagerbot.commands;
 
+import com.hispanicpvp.hispanicmanagerbot.utils.Utils;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.Permission;
@@ -18,7 +19,7 @@ public class KickCommand extends Command {
         this.userPermissions = new Permission[]{
                 Permission.KICK_MEMBERS
         };
-        this.requiredRole = "Usuario";
+        this.requiredRole = new Utils().getRequiredRole();
         this.hidden = true;
     }
 
@@ -34,16 +35,17 @@ public class KickCommand extends Command {
                 commandEvent.reply("You can't kick yourself!, " + author.getAsMention());
                 return;
             }
-
-            commandEvent.reply("The user " + mentionedMember.getEffectiveName() + " was kicked from the server.");
+            
             commandEvent.getGuild().kick(mentionedMember).queue();
 
+            CommandUtils.sendModerationLog(commandEvent,
+                    "The user " + mentionedMember.getEffectiveName() + " was kicked from the server.");
         } catch (IndexOutOfBoundsException e) {
             commandEvent.reply("You must mention a @user");
         } catch (HierarchyException e) {
             commandEvent.reply("You need to modify the bot permissions");
         } catch (Exception e) {
-            commandEvent.reply("An error ocurred");
+            CommandUtils.sendModerationLog(commandEvent, "Error ocurred on KickCommand");
             logger.error("Error ocurred on KickCommand: " + e.getMessage());
         }
 
