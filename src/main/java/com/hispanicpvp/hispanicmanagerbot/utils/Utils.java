@@ -23,4 +23,8 @@ public class Utils {
     }
 
     public String getOwnerId() { return properties.getProperty("OWNER_ID"); }
+
+    public String getBasicRole() { return properties.getProperty("basicRole"); }
+
+    public String getModerationCommandsLogChannel() { return properties.getProperty("moderationCommandsLogsChannel"); }
 }
