@@ -21,11 +21,11 @@ public class RegisterCommand extends Command {
         Member author = commandEvent.getMember();
 
         author.getRoles().stream()
-                .filter(role -> role.getName().equalsIgnoreCase(utils.getRequiredRole()))
+                .filter(role -> role.getName().equalsIgnoreCase(utils.getBasicRole()))
                 .findFirst()
                 .ifPresentOrElse(role -> commandEvent.reply("You are already registered."),
                         () -> {
-                   Role role = commandEvent.getGuild().getRolesByName(utils.getRequiredRole(), true).get(0);
+                   Role role = commandEvent.getGuild().getRolesByName(utils.getBasicRole(), true).get(0);
                    commandEvent.getGuild().addRoleToMember(author, role).queue();
                    commandEvent.reply("You have been registered.");
                         });
