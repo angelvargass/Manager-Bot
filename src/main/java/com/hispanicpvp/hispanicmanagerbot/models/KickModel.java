@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "TBL_KICK")
-public class Kick {
+public class KickModel {
 
     @Id
     @Column(name = "ID")
@@ -25,7 +25,7 @@ public class Kick {
     @Column(name = "DATE")
     private LocalDate date;
 
-    public Kick() {}
+    public KickModel() {}
 
     public UUID getId() {
         return id;

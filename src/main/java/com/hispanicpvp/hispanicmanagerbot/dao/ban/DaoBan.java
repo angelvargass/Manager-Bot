@@ -1,14 +1,14 @@
 package com.hispanicpvp.hispanicmanagerbot.dao.ban;
 
-import com.hispanicpvp.hispanicmanagerbot.models.Ban;
+import com.hispanicpvp.hispanicmanagerbot.models.BanModel;
 
 import java.util.List;
 
 public interface DaoBan {
 
-    void register(Ban ban);
+    void register(BanModel ban);
 
-    Ban retrieveById(Ban ban);
+    BanModel retrieveById(BanModel ban);
 
-    List<Ban> retrieveAll();
+    List<BanModel> retrieveAll();
 }

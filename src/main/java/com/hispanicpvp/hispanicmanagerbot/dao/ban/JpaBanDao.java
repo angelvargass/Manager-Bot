@@ -1,9 +1,9 @@
 package com.hispanicpvp.hispanicmanagerbot.dao.ban;
 
 import com.hispanicpvp.hispanicmanagerbot.jpautil.JPAUtil;
-import com.hispanicpvp.hispanicmanagerbot.models.Ban;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.hispanicpvp.hispanicmanagerbot.logger.Logger;
+import com.hispanicpvp.hispanicmanagerbot.models.BanModel;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -11,12 +11,12 @@ import java.util.List;
 
 public class JpaBanDao implements DaoBan {
 
-    static final Logger logger = LoggerFactory.getLogger(JpaBanDao.class);
+    private final Logger logger = new Logger(JpaBanDao.class);
     private EntityManager em;
     private EntityTransaction et;
 
     @Override
-    public void register(Ban ban) {
+    public void register(BanModel ban) {
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
         et = em.getTransaction();
 
@@ -35,14 +35,14 @@ public class JpaBanDao implements DaoBan {
     }
 
     @Override
-    public Ban retrieveById(Ban ban) {
+    public BanModel retrieveById(BanModel ban) {
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        return em.find(Ban.class, ban);
+        return em.find(BanModel.class, ban);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Ban> retrieveAll() {
+    public List<BanModel> retrieveAll() {
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
         return em.createQuery("FROM TBL_BAN").getResultList();
     }

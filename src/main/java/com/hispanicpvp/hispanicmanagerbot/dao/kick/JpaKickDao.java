@@ -1,21 +1,22 @@
 package com.hispanicpvp.hispanicmanagerbot.dao.kick;
 
+import com.hispanicpvp.hispanicmanagerbot.dao.ban.JpaBanDao;
 import com.hispanicpvp.hispanicmanagerbot.jpautil.JPAUtil;
-import com.hispanicpvp.hispanicmanagerbot.models.Kick;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.hispanicpvp.hispanicmanagerbot.logger.Logger;
+import com.hispanicpvp.hispanicmanagerbot.models.KickModel;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class JpaKickDao implements DaoKick {
-    static final Logger logger = LoggerFactory.getLogger(JpaKickDao.class);
+    private final Logger logger = new Logger(JpaBanDao.class);
     private EntityManager em;
     private EntityTransaction et;
 
     @Override
-    public void register(Kick kick) {
+    public void register(KickModel kick) {
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
         et = em.getTransaction();
 
@@ -34,14 +35,14 @@ public class JpaKickDao implements DaoKick {
     }
 
     @Override
-    public Kick retrieveById(Kick kick) {
+    public KickModel retrieveById(KickModel kick) {
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        return em.find(Kick.class, kick);
+        return em.find(KickModel.class, kick);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Kick> retrieveAll() {
+    public List<KickModel> retrieveAll() {
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
         return em.createQuery("FROM TBL_KICK").getResultList();
     }

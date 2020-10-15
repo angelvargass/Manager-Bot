@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "TBL_BAN")
-public class Ban {
+public class BanModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -26,7 +26,7 @@ public class Ban {
     @Column(name = "DATE")
     private LocalDate date;
 
-    public Ban() {}
+    public BanModel() {}
 
     public UUID getId() {
         return id;

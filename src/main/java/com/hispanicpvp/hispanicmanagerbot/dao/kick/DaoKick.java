@@ -1,14 +1,14 @@
 package com.hispanicpvp.hispanicmanagerbot.dao.kick;
 
-import com.hispanicpvp.hispanicmanagerbot.models.Kick;
+import com.hispanicpvp.hispanicmanagerbot.models.KickModel;
 
 import java.util.List;
 
 public interface DaoKick {
 
-    void register(Kick kick);
+    void register(KickModel kick);
 
-    Kick retrieveById(Kick kick);
+    KickModel retrieveById(KickModel kick);
 
-    List<Kick> retrieveAll();
+    List<KickModel> retrieveAll();
 }

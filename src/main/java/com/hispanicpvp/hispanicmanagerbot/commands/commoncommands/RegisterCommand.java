@@ -1,23 +1,23 @@
-package com.hispanicpvp.hispanicmanagerbot.commands;
+package com.hispanicpvp.hispanicmanagerbot.commands.commoncommands;
 
-import com.hispanicpvp.hispanicmanagerbot.utils.Utils;
-import com.jagrosh.jdautilities.command.Command;
+import com.hispanicpvp.hispanicmanagerbot.commands.BaseCommand;
+import com.hispanicpvp.hispanicmanagerbot.properties.PropertiesManager;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 
-public class RegisterCommand extends Command {
+public class RegisterCommand extends BaseCommand {
 
     public RegisterCommand() {
+        super(RegisterCommand.class);
         this.name = "register";
         this.help = "Register with the bot to get a role.";
         this.arguments = "<user>";
-        this.cooldown = 10;
     }
 
     @Override
-    protected void execute(CommandEvent commandEvent) {
-        Utils utils = new Utils();
+    public void execute(CommandEvent commandEvent) {
+        PropertiesManager utils = new PropertiesManager();
         Member author = commandEvent.getMember();
 
         author.getRoles().stream()
